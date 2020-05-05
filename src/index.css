@@ -1,0 +1,11 @@
+body{
+  background-color: #133133;
+}
+
+.btn-outline-primary:hover, .btn-primary{
+  color: #133133!important;
+}
+
+.bg-secondary{
+  background-color: #133133!important;
+}
