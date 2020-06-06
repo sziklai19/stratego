@@ -12,7 +12,7 @@ export function Desc() {
                     </div>
                     <div id="rules" className="collapse" aria-labelledby="rulesHeading" data-parent="#accordion">
                         <div className="card-body">
-                            <div class="card mb-3 text-justify bg-secondary text-light">
+                            <div className="card mb-3 text-justify bg-secondary text-light">
                                 <div className="card-body">
                                     <h5 className="card-title">Stratego</h5>
                                     <p className="card-text">A Stratego egy izgalmas stratégiai társasjáték. A játékosok
@@ -21,7 +21,7 @@ export function Desc() {
                                     folyamatos döntésre készteti a játékosokat a csata megnyeréséért.</p>
                                 </div>
                             </div>
-                            <div class="card mb-3 text-justify bg-light">
+                            <div className="card mb-3 text-justify bg-light">
                                 <div className="card-body">
                                     <h5 className="card-title">A CSATA:</h5>
                                     <p className="card-text">A Csatában a játékosok az összes játékfigurával játszanak. A játéktáblát az asztal közepére teszik
@@ -39,7 +39,7 @@ export function Desc() {
                                     a játékot, aki csak védekezési taktikát folytat.</p>
                                 </div>
                             </div>
-                            <div class="card mb-3 text-justify bg-light">
+                            <div className="card mb-3 text-justify bg-light">
                                 <div className="card-body">
                                     <h5 className="card-title">A JÁTÉK MENETE:</h5>
                                     <p className="card-text">A játékot a piros játékos kezdi. A játék további
@@ -53,7 +53,7 @@ export function Desc() {
                                     saját figurája áll!</p>
                                 </div>
                             </div>
-                            <div class="card mb-3 text-justify bg-light">
+                            <div className="card mb-3 text-justify bg-light">
                                 <div className="card-body">
                                     <h5 className="card-title">LÉPÉS A SAJÁT FIGURÁVAL:</h5>
                                     <p className="card-text">A saját figurával egy mezőt lehet lépni tetszőleges irányba: jobbra,
@@ -66,7 +66,7 @@ export function Desc() {
                                     átugrani nem lehet!</p>
                                 </div>
                             </div>
-                            <div class="card mb-3 text-justify bg-light">
+                            <div className="card mb-3 text-justify bg-light">
                                 <div className="card-body">
                                     <h5 className="card-title">IDE-ODA LÉPTETÉS:</h5>
                                     <p className="card-text">Ugyanazon a két mezőn legfeljebb háromszor léptethetjük ide-oda
@@ -74,7 +74,7 @@ export function Desc() {
                                     Legkésőbb a negyedik lépés során egy harmadik mezőre kell lépni.</p>
                                 </div>
                             </div>
-                            <div class="card mb-3 text-justify bg-light">
+                            <div className="card mb-3 text-justify bg-light">
                                 <div className="card-body">
                                     <h5 className="card-title">TÖBB MEZŐ SZABÁLY:</h5>
                                     <p className="card-text">Nem engedélyezett folyamatosan egy, vagy több ellenséges figura egymást követő lépések során történő
@@ -85,7 +85,7 @@ export function Desc() {
                                     A zászló és a bomba nem mozdítható el arról a helyről, ahova a játék elején felállítottuk őket.</p>
                                 </div>
                             </div>
-                            <div class="card mb-3 text-justify bg-light">
+                            <div className="card mb-3 text-justify bg-light">
                                 <div className="card-body">
                                     <h5 className="card-title">A FELDERÍTŐK (2):</h5>
                                     <p className="card-text">A felderítőkre különleges szabályok érvényesek. A felderítők tetszőleges számú üres mezőt
@@ -95,7 +95,7 @@ export function Desc() {
                                     (megkoccint) egy ellenséges figurát.</p>
                                 </div>
                             </div>
-                            <div class="card mb-3 text-justify bg-light">
+                            <div className="card mb-3 text-justify bg-light">
                                 <div className="card-body">
                                     <h5 className="card-title">ELLENSÉGES FIGURA MEGTÁMADÁSA:</h5>
                                     <p className="card-text">Ellenséges figurát csak valamelyik szomszédos mezőről támadhatunk meg (kivétel a felderítő (2)!). Ha a két
@@ -112,42 +112,42 @@ export function Desc() {
                                     A jegyzetelés bármilyen formája tilos!</p>
                                 </div>
                             </div>
-                            <div class="card mb-3 text-justify bg-light">
+                            <div className="card mb-3 text-justify bg-light">
                                 <div className="card-body">
                                     <h5 className="card-title">A KATONAI RANGFOKOZATOK (MELYIK FIGURA AZ ERŐSEBB?):</h5>
                                     <p className="card-text">Alapszabály, hogy a magasabb rangú figura üti az alacsonyabb rangút. A tábornagy (10) a legmagasabb rangú,
                                     tehát minden más figurát üt a tábornoktól (9) a kémig (1).</p>
                                 </div>
                             </div>
-                            <div class="card mb-3 text-justify bg-light">
+                            <div className="card mb-3 text-justify bg-light">
                                 <div className="card-body">
                                     <h5 className="card-title">KÜLÖNLEGES ESETEK:</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">1. TÁBORNAGY (10):</h6>
+                                    <h6 className="card-subtitle mb-2 text-muted">1. TÁBORNAGY (10):</h6>
                                     <p className="card-text">A tábornagy (10) üti a tábornokot (9) és az összes alacsonyabb rangú figurát. Ám a kém (1) mégis ütheti! Rajta
                                     kívül csak a bombák okozhatják a tábornagy vesztét, ha véletlenül megtámad egyet.</p>
-                                    <h6 class="card-subtitle mb-2 text-muted">2. BOMBÁK:</h6>
+                                    <h6 className="card-subtitle mb-2 text-muted">2. BOMBÁK:</h6>
                                     <p className="card-text">A bombákat csak az aknászok (3) képesek ártalmatlanná tenni. Ha a támadó más figurával támad meg egy
                                     bombát, vereséget szenved, amit a bomba tulajdonosa „bumm!” kiáltással tudat vele. Ha az aknásznak sikerült
                                     ártalmatlanná tennie egy bombát, akkor leveszi a játéktábláról, és a helyére lép.</p>
-                                    <h6 class="card-subtitle mb-2 text-muted">3. A KÉM (1):</h6>
+                                    <h6 className="card-subtitle mb-2 text-muted">3. A KÉM (1):</h6>
                                     <p className="card-text">A kém (1) a legalacsonyabb rangú figura, ezért minden más figura üti. Van azonban egy különleges képessége:
                                     ha ő maga támadja meg a tábornagyot, akkor győz, és a legmagasabb rangú tiszt elesik. Vigyázat! Ha a
                                     tábornagy (10) támadja meg a kémet, akkor a kém (1) esik el.</p>
-                                    <h6 class="card-subtitle mb-2 text-muted">4. A ZÁSZLÓ:</h6>
+                                    <h6 className="card-subtitle mb-2 text-muted">4. A ZÁSZLÓ:</h6>
                                     <p className="card-text">A zászlót bármelyik mozgó figura megszerezheti, akár a nagy távokat átlépő felderítő is.</p>
                                 </div>
                             </div>
-                            <div class="card mb-3 text-justify bg-light">
+                            <div className="card mb-3 text-justify bg-light">
                                 <div className="card-body">
                                     <h5 className="card-title">A JÁTÉK VÉGE:</h5>
                                     <p className="card-text">A játék akkor ér véget, ha az egyik játékos megszerzi az ellenfele zászlóját, illetve mozgásképtelenné teszi az
                                     ellenséget. Amelyik csapatból már csupán a bombák és a zászló maradt meg, kénytelen megadni magát.</p>
                                 </div>
                             </div>
-                            <div class="card mb-3 text-justify bg-light">
+                            <div className="card mb-3 text-justify bg-light">
                                 <div className="card-body">
                                     <h5 className="card-title">STRATÉGIA ÉS TAKTIKA:</h5>
-                                    <p className="card-text">
+                                    <div className="card-text">
                                         <ul>
                                             <li>
                                                 A játék végkimenetele döntően függhet az alapfelállástól. Mivel a zászlónak központi szerepe van,
@@ -188,7 +188,7 @@ export function Desc() {
                                                 milyen figurák vannak még játékban.
                                             </li>
                                         </ul>
-                                    </p>
+                                    </div>
                                 </div>
                             </div>
                             <div className="row justify-content-sm-center border rounded mx-auto">

@@ -1,28 +1,29 @@
-export const ADD_TILE = 'ADD_TILE';
-export const REMOVE_TILE = 'REMOVE_TILE';
-export const SELECT_TILE = 'SELECT_TILE';
+export const ADD_FIGURE = 'ADD_FIGURE';
+export const REMOVE_FIGURE = 'REMOVE_FIGURE';
+export const SELECT_FIGURE = 'SELECT_FIGURE';
 
-export const selectTile = (tileId) => {
+export const selectFigure = (tileId) => {
     return {
-        type: SELECT_TILE,
+        type: SELECT_FIGURE,
         payload: {
             tileId,
         },
     }
 }
 
-export const addTile = (tileId) => {
+export const addFigure = (tileId, figureId) => {
     return {
-        type: ADD_TILE,
+        type: ADD_FIGURE,
         payload: {
             tileId,
+            figureId,
         },
     }
 }
 
-export const removeTile = (tileId) => {
+export const removeFigure = (tileId) => {
     return {
-        type: REMOVE_TILE,
+        type: REMOVE_FIGURE,
         payload: {
             tileId,
         },

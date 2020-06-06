@@ -1,4 +1,4 @@
-import { ADD_PIECE, MOVE_PIECE, REMOVE_PIECE } from './actions';
+import { ADD_FIGURE, MOVE_PIECE, REMOVE_PIECE } from './actions';
 
 const initialState = { 
     count: 0,
@@ -9,7 +9,7 @@ export const boardReducer = (state = initialState, action) => {
     const { payload, type } = action;
 
     switch (type) {
-        case ADD_PIECE:
+        case ADD_FIGURE:
             const newItem = 'item' + state.count;
             return {
                 count: state.count+1,

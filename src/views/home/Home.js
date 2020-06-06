@@ -14,7 +14,7 @@ export function Home() {
                     </div>
                     <div className="col-md p-2 m-2 text-primary border-primary border rounded">
                         <h4>Csatlakozás szobához</h4>
-                        <div class="input-group">
+                        <div className="input-group">
                             <input type="text" className="form-control" placeholder="Szoba kódja" />
                             <div className="input-group-append">
                                 <Link to="/prep" className="btn btn-primary">Csatlakozás</Link>

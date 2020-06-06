@@ -1,0 +1,33 @@
+.figure-container{
+    width: 100%;
+    padding-top: 100%;
+    position: relative;
+    background: white;
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5);
+    color: black;
+}
+
+.selected{
+    box-shadow: inset 0px 0px 50px 5px #FED136;
+    z-index: 100;
+}
+
+.figure-container:hover{
+    box-shadow: 0px 0px 10px 5px #FED136;
+    z-index: 100;
+}
+
+.figure-container .figure{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.figure div{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
