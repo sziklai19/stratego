@@ -19,7 +19,7 @@ export const boardReducer = (state = initialState, action) => {
     switch (type) {
         case ADD_FIGURE:
             return {
-                tiles: state.tiles.map((item, key) => key === payload.tileId ? {user: 1, figure: payload.figureId} : item),
+                tiles: state.tiles.map((item, key) => key === payload.tileId ? {user: 0, figure: payload.figureId} : item),
                 size: state.size,
                 selected: state.selected,
             };

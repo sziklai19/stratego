@@ -7,7 +7,7 @@ import { Figure } from './figure/Figure';
 
 export function Prep() {
     //const dispatch = useDispatch();
-    //const items = useSelector(state => state.board.tiles);
+    const items = useSelector(state => state.board.tiles);
     const figures = useSelector(state => state.player[0].figures);
     //console.log(useSelector(state => state.board.count));
 
@@ -23,7 +23,7 @@ export function Prep() {
                 </div>
                 <div className="row">
                     <div className="col col-sm-12 col-md-6 col-lg-6 col-xl-5">
-                        <Board prep={true} />
+                        <Board prep={true} playerId={0} />
                     </div>
                     <div className="col col-sm-12 col-md-6 col-lg-6 col-xl-7">
                         {figures.map((item, key) => {
@@ -32,7 +32,7 @@ export function Prep() {
                             } else {
                                 return (
                                     <div key={'div' + key} style={{ width: "100px", margin: 5, padding: 5, border: "1px solid gray", float: "left" }}>
-                                        <Figure id={key} key={'figure' + key} />
+                                        <Figure id={key} playerId={0} />
                                     </div>
                                 )
                             }

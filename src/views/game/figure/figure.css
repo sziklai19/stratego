@@ -12,6 +12,16 @@
     z-index: 100;
 }
 
+.selected:hover{
+    box-shadow: inset 0px 0px 50px 5px #FED136, 0px 0px 10px 5px #FED136;
+    z-index: 100;
+}
+
+.selected .figure-container:hover{
+    box-shadow: inset 0px 0px 50px 5px #FED136, 0px 0px 10px 5px #FED136;
+    z-index: 100;
+}
+
 .figure-container:hover{
     box-shadow: 0px 0px 10px 5px #FED136;
     z-index: 100;

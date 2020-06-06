@@ -1,16 +1,6 @@
 export const FIGURE_ADDED = 'FIGURE_ADDED';
 export const REMOVE_PIECE = 'REMOVE_PIECE';
-export const MOVE_PIECE = 'MOVE_PIECE';
-
-export const movePiece = (figureId, playerId) => {
-    return {
-        type: MOVE_PIECE,
-        payload: {
-            figureId,
-            playerId
-        },
-    }
-}
+export const SELECT_FIGURE = 'SELECT_FIGURE';
 
 export const figureAdded = (figureId, playerId, added) => {
     return {
@@ -19,6 +9,16 @@ export const figureAdded = (figureId, playerId, added) => {
             figureId,
             playerId,
             added
+        },
+    }
+}
+
+export const selectFigure = (figureId, playerId) => {
+    return {
+        type: SELECT_FIGURE,
+        payload: {
+            figureId,
+            playerId
         },
     }
 }

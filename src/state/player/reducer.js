@@ -1,4 +1,4 @@
-import { FIGURE_ADDED, MOVE_PIECE, REMOVE_PIECE } from './actions';
+import { FIGURE_ADDED, SELECT_FIGURE, REMOVE_PIECE } from './actions';
 
 const initialState = [
     {
@@ -16,7 +16,8 @@ const initialState = [
             { id: 10, type: '6', alive: true, added: false },
             { id: 11, type: '8', alive: true, added: false },
             { id: 12, type: '10', alive: true, added: false },
-        ]
+        ],
+        selected: null
     },
     {
         id: 1,
@@ -33,7 +34,8 @@ const initialState = [
             { id: 10, type: '6', alive: true, added: true },
             { id: 11, type: '8', alive: true, added: true },
             { id: 12, type: '10', alive: true, added: true },
-        ]
+        ],
+        selected: null
     }
 ];
 
@@ -42,30 +44,13 @@ export const playerReducer = (state = initialState, action) => {
 
     switch (type) {
         case FIGURE_ADDED:
-            //console.log(payload.figureId);
-            const mapper = (item, key) => {
-                if (item.id === payload.figureId) {
-                    item.added = payload.added;
-                }
-                return item;
-            };
-            return [
-                {
-                    id: 0,
-                    figures: state[0].figures.map(mapper)
-                },
-                state[1]
-            ];
-        case MOVE_PIECE:
+            state[payload.playerId].figures[payload.figureId].added = true;
+            return state;
+        case SELECT_FIGURE:
+            state[payload.playerId].selected = payload.figureId;
             return state;
         case REMOVE_PIECE:
-            const newItems = state.items.filter((item, key) => payload.pieceId !== key);
-            return {
-                count: state.count - 1,
-                items: [
-                    ...newItems
-                ],
-            };
+            return state;
         default:
             return state;
     }
