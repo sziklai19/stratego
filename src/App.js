@@ -6,6 +6,7 @@ import { Home } from './views/home/Home';
 import { Room } from './views/room/Room';
 import { Layout } from './views/layout/Layout';
 import { Prep } from './views/game/Prep';
+import { Board } from './views/game/Board';
 import { Game } from './views/game/Game';
 
 function App() {

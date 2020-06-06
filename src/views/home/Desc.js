@@ -194,53 +194,53 @@ export function Desc() {
                             <div className="row justify-content-sm-center border rounded mx-auto">
                                 <div className="w-100">A katonai rangfokozatok</div>
                                 <figure className="col-auto p-1 m-2">
-                                    <img src="./assets/rankings/zaszlo.png" className="border border-dark rounded" />
-                                    <figcaption className="figure-caption text-light">zászló<br />1x</figcaption>
+                                    <img src="./assets/rankings/zaszlo.png" alt="zászló" className="border border-dark rounded" />
+                                    <figcaption className="figure-caption text-dark">zászló<br />1x</figcaption>
                                 </figure>
                                 <figure className="col-auto p-1 m-2">
-                                    <img src="./assets/rankings/tabornagy.png" className="border border-dark rounded" />
-                                    <figcaption className="figure-caption text-light">tábornagy<br />1x</figcaption>
+                                    <img src="./assets/rankings/tabornagy.png" alt="tábornagy" className="border border-dark rounded" />
+                                    <figcaption className="figure-caption text-dark">tábornagy<br />1x</figcaption>
                                 </figure>
                                 <figure className="col-auto p-1 m-2">
-                                    <img src="./assets/rankings/tabornok.png" className="border border-dark rounded" />
-                                    <figcaption className="figure-caption text-light">tábornok<br />1x</figcaption>
+                                    <img src="./assets/rankings/tabornok.png" alt="tábornok" className="border border-dark rounded" />
+                                    <figcaption className="figure-caption text-dark">tábornok<br />1x</figcaption>
                                 </figure>
                                 <figure className="col-auto p-1 m-2">
-                                    <img src="./assets/rankings/ezredes.png" className="border border-dark rounded" />
-                                    <figcaption className="figure-caption text-light">ezredes<br />2x</figcaption>
+                                    <img src="./assets/rankings/ezredes.png" alt="ezredes" className="border border-dark rounded" />
+                                    <figcaption className="figure-caption text-dark">ezredes<br />2x</figcaption>
                                 </figure>
                                 <figure className="col-auto p-1 m-2">
-                                    <img src="./assets/rankings/ornagy.png" className="border border-dark rounded" />
-                                    <figcaption className="figure-caption text-light">őrnagy<br />3x</figcaption>
+                                    <img src="./assets/rankings/ornagy.png" alt="őrnagy" className="border border-dark rounded" />
+                                    <figcaption className="figure-caption text-dark">őrnagy<br />3x</figcaption>
                                 </figure>
                                 <figure className="col-auto p-1 m-2">
-                                    <img src="./assets/rankings/kapitany.png" className="border border-dark rounded" />
-                                    <figcaption className="figure-caption text-light">kapitány<br />4x</figcaption>
+                                    <img src="./assets/rankings/kapitany.png" alt="kapitány" className="border border-dark rounded" />
+                                    <figcaption className="figure-caption text-dark">kapitány<br />4x</figcaption>
                                 </figure>
                                 <div className="w-100"></div>
                                 <figure className="col-auto p-1 m-2">
-                                    <img src="./assets/rankings/fohadnagy.png" className="border border-dark rounded" />
-                                    <figcaption className="figure-caption text-light">főhadnagy<br />4x</figcaption>
+                                    <img src="./assets/rankings/fohadnagy.png" alt="főhadnagy" className="border border-dark rounded" />
+                                    <figcaption className="figure-caption text-dark">főhadnagy<br />4x</figcaption>
                                 </figure>
                                 <figure className="col-auto p-1 m-2">
-                                    <img src="./assets/rankings/ormester.png" className="border border-dark rounded" />
-                                    <figcaption className="figure-caption text-light">őrmester<br />4x</figcaption>
+                                    <img src="./assets/rankings/ormester.png" alt="őrmester" className="border border-dark rounded" />
+                                    <figcaption className="figure-caption text-dark">őrmester<br />4x</figcaption>
                                 </figure>
                                 <figure className="col-auto p-1 m-2">
-                                    <img src="./assets/rankings/aknasz.png" className="border border-dark rounded" />
-                                    <figcaption className="figure-caption text-light">aknász<br />5x</figcaption>
+                                    <img src="./assets/rankings/aknasz.png" alt="aknász" className="border border-dark rounded" />
+                                    <figcaption className="figure-caption text-dark">aknász<br />5x</figcaption>
                                 </figure>
                                 <figure className="col-auto p-1 m-2">
-                                    <img src="./assets/rankings/felderito.png" className="border border-dark rounded" />
-                                    <figcaption className="figure-caption text-light">felderítő<br />8x</figcaption>
+                                    <img src="./assets/rankings/felderito.png" alt="felderítő" className="border border-dark rounded" />
+                                    <figcaption className="figure-caption text-dark">felderítő<br />8x</figcaption>
                                 </figure>
                                 <figure className="col-auto p-1 m-2">
-                                    <img src="./assets/rankings/kem.png" className="border border-dark rounded" />
-                                    <figcaption className="figure-caption text-light">kém<br />1x</figcaption>
+                                    <img src="./assets/rankings/kem.png" alt="kém" className="border border-dark rounded" />
+                                    <figcaption className="figure-caption text-dark">kém<br />1x</figcaption>
                                 </figure>
                                 <figure className="col-auto p-1 m-2">
-                                    <img src="./assets/rankings/bomba.png" className="border border-dark rounded" />
-                                    <figcaption className="figure-caption text-light">bomba<br />6x</figcaption>
+                                    <img src="./assets/rankings/bomba.png" alt="bomba" className="border border-dark rounded" />
+                                    <figcaption className="figure-caption text-dark">bomba<br />6x</figcaption>
                                 </figure>
                             </div>
                         </div>

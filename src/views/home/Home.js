@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link, Switch, Route } from 'react-router-dom';
-import { Room } from '../room/Room';
+import { Link } from 'react-router-dom';
 import { Desc } from './Desc';
 
 export function Home() {
