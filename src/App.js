@@ -19,10 +19,10 @@ function App() {
                     <Layout><Room /></Layout>
                 </Route>
                 <Route path="/prep">
-                    <Prep />
+                    <Prep playerId={0} />
                 </Route>
                 <Route path="/game">
-                    <Game />
+                    <Game playerId={0} />
                 </Route>
                 <Route>
                     <Redirect to="/" />

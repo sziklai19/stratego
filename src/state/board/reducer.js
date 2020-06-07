@@ -3,8 +3,8 @@ import { ADD_FIGURE, REMOVE_FIGURE } from './actions';
 
 const initialState = {
     tiles: [
-        null, null, null, null, null, null,
-        null, null, null, null, null, null,
+        { user: 1, figure: 0 }, { user: 1, figure: 1 }, { user: 1, figure: 2 }, { user: 1, figure: 3 }, { user: 1, figure: 4 }, { user: 1, figure: 5 },
+        { user: 1, figure: 6 }, { user: 1, figure: 7 }, { user: 1, figure: 8 }, { user: 1, figure: 9 }, { user: 1, figure: 10 }, { user: 1, figure: 11 },
         null, null, null, null, null, null,
         null, null, null, null, null, null,
         null, null, null, null, null, null,

@@ -22,7 +22,8 @@ const initialState = [
     },
     {
         id: 1,
-        hand: [
+        hand: new Array(12).fill(null),
+        figures: [
             { id: 0, type: 'flag', alive: true },
             { id: 1, type: 'bomb', alive: true },
             { id: 2, type: 'bomb', alive: true },
@@ -36,7 +37,6 @@ const initialState = [
             { id: 10, type: '8', alive: true },
             { id: 11, type: '10', alive: true },
         ],
-        figures: new Array(12).fill(null),
         selected: null
     }
 ];

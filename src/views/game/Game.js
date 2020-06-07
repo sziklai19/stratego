@@ -7,11 +7,14 @@ export function Game() {
 
     return (
         <>
-            <div className="col col-5" >
-            <Board />
+            <div className="row">
+                <div className="col col-5 m-3">
+                    <Board playerId={0} />
+                </div>
+                <div className="col col-7 m-3">
+                    <Link to="/" className="btn btn-outline-primary">Ha valaki nyert vissza lehet lépni</Link>
+                </div>
             </div>
-            <Link to="/" className="btn btn-outline-primary">Ha valaki nyert vissza lehet lépni</Link>
-            <img src="./assets/Stratego.png" alt="game" className="mx-auto d-block"/>
         </>
     );
 }

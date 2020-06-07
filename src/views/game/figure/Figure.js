@@ -3,7 +3,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectFigure } from '../../../state/player/actions';
 
-export function Figure({ id, playerId, tile, inHand, className }) {
+export function Figure({ id, playerId, tile, inHand, className, hide }) {
     const figures = useSelector(state => state.player[playerId].figures);
     const hand = useSelector(state => state.player[playerId].hand);
     const selected = useSelector(state => state.player[playerId].selected) === id;
@@ -16,13 +16,10 @@ export function Figure({ id, playerId, tile, inHand, className }) {
 
     return (
         <div tile={tile} className={(selected ? 'selected ' : '') + 'figure-container ' + className}>
-            <div tile={tile} className="figure" onClick={() => {
-                select(id, playerId);
-                //console.log('inHand: '+inHand);
-                //console.log('hand: '+hand[id]);
-                //console.log('figures: '+figures[id]);
+            <div tile={tile} className={(hide ? 'player2 ' : 'player1 ') + 'figure'} onClick={() => {
+                if(!hide) select(id, playerId);
             }}>
-                <div tile={tile}>{inHand ? hand.find(item => item != null && item.id === id).type : figures.find(item => item != null && item.id === id).type}</div>
+                {!hide ? <div tile={tile}>{inHand ? hand.find(item => item != null && item.id === id).type : figures.find(item => item != null && item.id === id).type}</div> : <div></div>}
             </div>
         </div>
     );

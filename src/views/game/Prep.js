@@ -7,13 +7,13 @@ import { selectFigure, backToHand } from '../../state/player/actions';
 import { Board } from './board/Board';
 import { Figure } from './figure/Figure';
 
-export function Prep() {
-    const playerId = 0;
+export function Prep({ playerId }) {
+    //const playerId = 0;
     const dispatch = useDispatch();
     const tiles = useSelector(state => state.board.tiles);
-    const hand = useSelector(state => state.player[0].hand);
-    const selected = useSelector(state => state.player[0].selected);
-    
+    const hand = useSelector(state => state.player[playerId].hand);
+    const selected = useSelector(state => state.player[playerId].selected);
+
     const remove = (tileId) => dispatch(removeFigure(tileId));
     const select = (figureId, playerId) => dispatch(selectFigure(figureId, playerId));
     const toHand = (playerId, tileId, handId, figureId) => dispatch(backToHand(playerId, tileId, handId, figureId));
@@ -22,16 +22,25 @@ export function Prep() {
         const tile = parseInt(ev.target.attributes.getNamedItem('hand').value); // cél csempe id-je
         console.log('tile: ' + tile);
         if (selected != null) {
-            const start = tiles.findIndex(item => item != null && item.figure === selected);
+            const start = tiles.findIndex(item => item != null && item.user === playerId && item.figure === selected);
             if (start !== -1) {
                 console.log('start: ' + start);
                 console.log('selected: ' + selected);
-                toHand(0, start, tile, selected);
+                toHand(playerId, start, tile, selected);
                 remove(start);
-            }else{
-                toHand(0, start, tile, selected);
+            } else {
+                toHand(playerId, start, tile, selected);
             }
             select(null, playerId);
+        }
+    }
+
+    function startGame() {
+        //console.log(hand.findIndex(item => item != null) === -1)
+        if (hand.findIndex(item => item != null) === -1) {
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -43,7 +52,7 @@ export function Prep() {
                 </div>
                 <div className="row">
                     <div className="col col-sm-12 col-md-6 col-lg-6 col-xl-5">
-                        <Board prep={true} playerId={0} />
+                        <Board prep={true} playerId={playerId} />
                     </div>
                     <div className="col col-sm-12 col-md-6 col-lg-6 col-xl-7">
                         {hand.map((item, key) => {
@@ -56,7 +65,7 @@ export function Prep() {
                             } else {
                                 return (
                                     <div key={'div' + key} id={item.id} style={{ width: "100px", cursor: "pointer", margin: 5, padding: 5, border: "1px solid gray", float: "left" }}>
-                                        <Figure id={item.id} playerId={0} inHand={true} />
+                                        <Figure id={item.id} playerId={playerId} inHand={true} />
                                     </div>
                                 )
                             }
@@ -64,7 +73,7 @@ export function Prep() {
                     </div>
                 </div>
                 <div className="row m-2">
-                    <Link to="/game" className="btn btn-outline-primary">Játék indítása</Link>
+                    <Link to="/game" className="btn btn-outline-primary" style={startGame() ? { display: "block" } : { display: "none" }}>Játék indítása</Link>
                 </div>
             </div>
         </>
