@@ -1,4 +1,4 @@
-import { ADD_FIGURE, REMOVE_FIGURE, SELECT_FIGURE } from './actions';
+import { ADD_FIGURE, REMOVE_FIGURE } from './actions';
 
 
 const initialState = {
@@ -19,18 +19,13 @@ export const boardReducer = (state = initialState, action) => {
     switch (type) {
         case ADD_FIGURE:
             return {
-                tiles: state.tiles.map((item, key) => key === payload.tileId ? {user: 0, figure: payload.figureId} : item),
+                tiles: state.tiles.map((item, key) => key === payload.tileId ? { user: 0, figure: payload.figureId } : item),
                 size: state.size,
-                selected: state.selected,
             };
-        case SELECT_FIGURE:
-            state.selected = payload.tileId;
-            return state;
         case REMOVE_FIGURE:
             return {
-                tiles: state.tiles.map((item, key) => key === payload.tileId ? null : item ),
+                tiles: state.tiles.map((item, key) => key === payload.tileId ? null : item),
                 size: state.size,
-                selected: state.selected,
             };
         default:
             return state;
