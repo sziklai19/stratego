@@ -11,12 +11,13 @@ export const selectFigure = (tileId) => {
     }
 }
 
-export const addFigure = (tileId, figureId) => {
+export const addFigure = (tileId, figureId, playerId) => {
     return {
         type: ADD_FIGURE,
         payload: {
             tileId,
             figureId,
+            playerId
         },
     }
 }

@@ -1,5 +1,5 @@
 export const FIGURE_ADDED = 'FIGURE_ADDED';
-export const REMOVE_PIECE = 'REMOVE_PIECE';
+export const KILL_FIGURE = 'KILL_FIGURE';
 export const SELECT_FIGURE = 'SELECT_FIGURE';
 export const BACK_TO_HAND = 'BACK_TO_HAND';
 
@@ -23,11 +23,12 @@ export const selectFigure = (figureId, playerId) => {
     }
 }
 
-export const removePiece = (pieceId) => {
+export const killFigure = (playerId, figureId) => {
     return {
-        type: REMOVE_PIECE,
+        type: KILL_FIGURE,
         payload: {
-            pieceId,
+            figureId,
+            playerId
         },
     }
 }

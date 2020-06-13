@@ -36,6 +36,11 @@
     background-size: cover;
 }
 
+.grass-tile.possible{
+    background: #FED13630;
+    box-shadow: inset 0px 0px 0px 2px #FED136;
+}
+
 .board-container{
     width: 100%;
     padding-top: 100%;

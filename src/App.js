@@ -8,7 +8,11 @@ import { Layout } from './views/layout/Layout';
 import { Prep } from './views/game/Prep';
 import { Game } from './views/game/Game';
 
+import { useSelector } from 'react-redux';
+
 function App() {
+    const player = useSelector(state => state.game.player);
+
     return (
         <Router>
             <Switch>
@@ -19,10 +23,10 @@ function App() {
                     <Layout><Room /></Layout>
                 </Route>
                 <Route path="/prep">
-                    <Prep playerId={0} />
+                    <Prep playerId={player} />
                 </Route>
                 <Route path="/game">
-                    <Game playerId={0} />
+                    <Game playerId={player} />
                 </Route>
                 <Route>
                     <Redirect to="/" />

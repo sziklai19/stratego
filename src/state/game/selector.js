@@ -1,3 +1,3 @@
 export const pieceSelector = (state) => {
-    return state.board.items;
+    return state.game.items;
 }

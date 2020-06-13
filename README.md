@@ -1,8 +1,8 @@
 Sziklai Dávid
 CBJ6AX
-KLIENSOLDALI WEBPROGRAMOZÁS, STRATEGO, 1. felvonás
-2020.05.10. 18:15
-Ezt a megoldást Sziklai Dávid CBJ6AX küldte be és készítette a KLIENSOLDALI WEBPROGRAMOZÁS kurzus STRATEGO, 1. felvonás feladatához.
+KLIENSOLDALI WEBPROGRAMOZÁS, STRATEGO, 2. felvonás
+2020.06.07.
+Ezt a megoldást Sziklai Dávid CBJ6AX küldte be és készítette a KLIENSOLDALI WEBPROGRAMOZÁS kurzus STRATEGO, 2. felvonás feladatához.
 Kijelentem, hogy ez a megoldás a saját munkám.
 Nem másoltam vagy használtam harmadik féltől származó megoldásokat.
 Nem továbbítottam megoldást hallgatótársaimnak, és nem is tettem közzé.
