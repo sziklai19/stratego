@@ -3,12 +3,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Board } from './board/Board';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { nextPlayer } from '../../state/game/actions';
+import { useSelector/*, useDispatch*/ } from 'react-redux';
+//import { nextPlayer } from '../../state/game/actions';
 
 export function Game({ playerId }) {
-    const dispatch = useDispatch();
-    const switchPlayer = (playerId) => dispatch(nextPlayer(playerId));
+    //const dispatch = useDispatch();
+    //const switchPlayer = (playerId) => dispatch(nextPlayer(playerId));
     const hand0 = useSelector(state => state.player[0].figures);
     const hand1 = useSelector(state => state.player[1].figures);
     const end = useSelector(state => state.game.end);
@@ -31,7 +31,9 @@ export function Game({ playerId }) {
                         <ul className="col col-12">
                             {hand0.map(item => {
                                 if (item != null && item.alive === false) {
-                                    return (<li>{item.type}</li>);
+                                    return (<li key={'red'+item.id}>{item.type}</li>);
+                                } else {
+                                    return null;
                                 }
                             })}
                         </ul>
@@ -41,7 +43,9 @@ export function Game({ playerId }) {
                         <ul className="col col-12">
                             {hand1.map(item => {
                                 if (item != null && item.alive === false) {
-                                    return (<li>{item.type}</li>);
+                                    return (<li key={'red'+item.id}>{item.type}</li>);
+                                } else {
+                                    return null;
                                 }
                             })}
                         </ul>

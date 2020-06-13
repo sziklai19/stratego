@@ -1,7 +1,7 @@
 import { FIGURE_ADDED, SELECT_FIGURE, BACK_TO_HAND, KILL_FIGURE } from './actions';
 
 //Ez az eredeti.
-const initialState = [
+/*const initialState = [
     {
         id: 0,
         hand: [
@@ -40,10 +40,10 @@ const initialState = [
         ],
         selected: null
     }
-];
+];*/
 
 //Ez csak a game oldal teszteléséhez.
-/*const initialState = [
+const initialState = [
     {
         id: 0,
         hand: new Array(12).fill(null),
@@ -82,7 +82,7 @@ const initialState = [
         ],
         selected: null
     }
-];*/
+];
 
 export const playerReducer = (state = initialState, action) => {
     const { payload, type } = action;
@@ -98,7 +98,6 @@ export const playerReducer = (state = initialState, action) => {
             return state;
         case BACK_TO_HAND:
             const figure = state[payload.playerId].hand.findIndex(item => item != null && item.id === payload.figureId);
-            const hand = state[payload.playerId].hand.findIndex(item => item != null && item.id === payload.handId);
             if(payload.tileId === -1){
                 state[payload.playerId].hand[payload.handId] = state[payload.playerId].hand[figure];
                 state[payload.playerId].hand[figure] = null;

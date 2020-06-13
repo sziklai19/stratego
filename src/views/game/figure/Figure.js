@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectFigure } from '../../../state/player/actions';
 
 export function Figure({ id, playerId, tile, inHand, className, hide }) {
-    console.log(playerId);
+    //console.log(playerId);
     const figures = useSelector(state => state.player[playerId].figures);
     const hand = useSelector(state => state.player[playerId].hand);
     const selected = useSelector(state => state.player[playerId].selected) === id;
@@ -30,7 +30,6 @@ export function Figure({ id, playerId, tile, inHand, className, hide }) {
                         select(null, 1);
                     }
                 }
-                console.log()
             }}>
                 {!hide ? <div tile={tile}>{inHand ? hand.find(item => item != null && item.id === id).type : figures.find(item => item != null && item.id === id).type}</div> : <div></div>}
             </div>

@@ -61,12 +61,10 @@ export function Board({ prep, playerId, figureId }) {
                         gameEnd(true, playerId);
                     } else {
                         if (parseInt(opponet.type) > parseInt(figure.type)) {
-                            console.log('opponent vin');
                             place(tile, opponet.id, playerId === 0 ? 1 : 0);
                             kill(playerId, selected);
                             remove(start);
                         } else if (parseInt(opponet.type) < parseInt(figure.type)) {
-                            console.log('you vin');
                             place(tile, selected, playerId);
                             kill(playerId === 0 ? 1 : 0, opponet.id);
                             remove(start);
@@ -124,25 +122,27 @@ export function Board({ prep, playerId, figureId }) {
                         }
                     } else {
                         if (item == null) {
-                            if (selectedTile % 6 === 0) {
-                                if (selectedTile === key + 6 || selectedTile === key - 6 || selectedTile === key - 1) {
+                            if (selectedTile !== -1) {
+                                if (selectedTile % 6 === 0) {
+                                    if (selectedTile === key + 6 || selectedTile === key - 6 || selectedTile === key - 1) {
+                                        return (
+                                            <div key={key} tile={key} className={'grass-tile possible'} onClick={drop}>
+                                            </div>
+                                        )
+                                    }
+                                } else if ((selectedTile + 1) % 6 === 0) {
+                                    if (selectedTile === key + 6 || selectedTile === key - 6 || selectedTile === key + 1) {
+                                        return (
+                                            <div key={key} tile={key} className={'grass-tile possible'} onClick={drop}>
+                                            </div>
+                                        )
+                                    }
+                                } else if (selectedTile === key + 6 || selectedTile === key - 6 || selectedTile === key - 1 || selectedTile === key + 1) {
                                     return (
                                         <div key={key} tile={key} className={'grass-tile possible'} onClick={drop}>
                                         </div>
                                     )
                                 }
-                            } else if ((selectedTile + 1) % 6 === 0) {
-                                if (selectedTile === key + 6 || selectedTile === key - 6 || selectedTile === key + 1) {
-                                    return (
-                                        <div key={key} tile={key} className={'grass-tile possible'} onClick={drop}>
-                                        </div>
-                                    )
-                                }
-                            } else if (selectedTile === key + 6 || selectedTile === key - 6 || selectedTile === key - 1 || selectedTile === key + 1) {
-                                return (
-                                    <div key={key} tile={key} className={'grass-tile possible'} onClick={drop}>
-                                    </div>
-                                )
                             }
                             return (
                                 <div key={key} tile={key} className='grass-tile'>
@@ -150,43 +150,45 @@ export function Board({ prep, playerId, figureId }) {
                             )
                         } else {
                             if (item.user !== playerId) {
-                                if (selectedTile % 6 === 0) {
-                                    if (selectedTile === key + 6 || selectedTile === key - 6 || selectedTile === key - 1) {
+                                if (selectedTile !== -1) {
+                                    if (selectedTile % 6 === 0) {
+                                        if (selectedTile === key + 6 || selectedTile === key - 6 || selectedTile === key - 1) {
+                                            return (
+                                                <div key={key} tile={key} className='grass-tile possible' onClick={drop}>
+                                                    <Figure tile={key} playerId={item.user} hide={true} />
+                                                </div>
+                                            )
+                                        }
+                                    } else if ((selectedTile + 1) % 6 === 0) {
+                                        if (selectedTile === key + 6 || selectedTile === key - 6 || selectedTile === key + 1) {
+                                            return (
+                                                <div key={key} tile={key} className='grass-tile possible' onClick={drop}>
+                                                    <Figure tile={key} playerId={item.user} hide={true} />
+                                                </div>
+                                            )
+                                        }
+                                    } else if (selectedTile === key + 6 || selectedTile === key - 6 || selectedTile === key - 1 || selectedTile === key + 1) {
                                         return (
                                             <div key={key} tile={key} className='grass-tile possible' onClick={drop}>
                                                 <Figure tile={key} playerId={item.user} hide={true} />
                                             </div>
                                         )
                                     }
-                                } else if ((selectedTile + 1) % 6 === 0) {
-                                    if (selectedTile === key + 6 || selectedTile === key - 6 || selectedTile === key + 1) {
-                                        return (
-                                            <div key={key} tile={key} className='grass-tile possible' onClick={drop}>
-                                                <Figure tile={key} playerId={item.user} hide={true} />
-                                            </div>
-                                        )
-                                    }
-                                } else if (selectedTile === key + 6 || selectedTile === key - 6 || selectedTile === key - 1 || selectedTile === key + 1) {
-                                    return (
-                                        <div key={key} tile={key} className='grass-tile possible' onClick={drop}>
-                                            <Figure tile={key} playerId={item.user} hide={true} />
-                                        </div>
-                                    )
                                 }
                                 return (
                                     <div key={key} tile={key} className='grass-tile'>
                                         <Figure tile={key} playerId={item.user} hide={true} />
                                     </div>
                                 )
-                            } else {
-                                return (
-                                    <div key={key} tile={key} className='grass-tile'>
-                                        <Figure tile={key} playerId={item.user} inHand={false} id={item.figure} hide={false} key={'figure' + key} />
-                                    </div>
-                                )
                             }
+                            return (
+                                <div key={key} tile={key} className='grass-tile'>
+                                    <Figure tile={key} playerId={item.user} inHand={false} id={item.figure} hide={false} key={'figure' + key} />
+                                </div>
+                            )
                         }
                     }
+                    return null;
                 })}
             </div>
         </div>
