@@ -3,21 +3,21 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addFigure, removeFigure } from '../../../state/board/actions';
 import { figureAdded, killFigure } from '../../../state/player/actions';
-import { nextPlayer, setOpponent, endGame } from '../../../state/game/actions';
+import { setOpponent, endGame } from '../../../state/game/actions';
 import { Figure } from '../figure/Figure';
 
 
 
-export function Board({ prep, playerId, figureId }) {
+export function Board({ prep, figureId }) {
     const dispatch = useDispatch();
     const place = (tileId, figureId, playerId) => dispatch(addFigure(tileId, figureId, playerId));
     const remove = (tileId) => dispatch(removeFigure(tileId));
     const added = (figureId, playerId) => dispatch(figureAdded(figureId, playerId));
-    const switchPlayer = (playerId) => dispatch(nextPlayer(playerId));
     const attack = (opponetId) => dispatch(setOpponent(opponetId));
     const kill = (playerId, figureId) => dispatch(killFigure(playerId, figureId))
     const gameEnd = (end) => dispatch(endGame(end));
 
+    const playerId = useSelector(state => state.game.player);
     const tiles = useSelector(state => state.board.tiles);
     const selected = useSelector(state => state.player[playerId].selected);
     const opponets = useSelector(state => state.player[playerId === 0 ? 1 : 0].figures);
@@ -49,7 +49,7 @@ export function Board({ prep, playerId, figureId }) {
                 if (tiles[tile] == null) {
                     place(tile, selected, playerId);
                     remove(start);
-                    switchPlayer(playerId);
+                    //switchPlayer(playerId);
                 } else {
                     const opponet = opponets.find(item => item != null && item.id === tiles[tile].figure);
                     attack(opponet.id);
@@ -75,7 +75,7 @@ export function Board({ prep, playerId, figureId }) {
                             remove(tile);
                         }
                     }
-                    switchPlayer(playerId);
+                    //switchPlayer(playerId);
 
                 }
             }
@@ -92,16 +92,30 @@ export function Board({ prep, playerId, figureId }) {
                     //console.log(item != null ? item.user : null)
                     if (prep) {
                         if (item == null) {
-                            if (key > 6 * 4 - 1) {
-                                return (
-                                    <div key={key} tile={key} className='grass-tile allowed' onClick={drop}>
-                                    </div>
-                                )
+                            if (playerId === 0) {
+                                if (key > 6 * 4 - 1) {
+                                    return (
+                                        <div key={key} tile={key} className='grass-tile allowed' onClick={drop}>
+                                        </div>
+                                    )
+                                } else {
+                                    return (
+                                        <div key={key} tile={key} className='grass-tile notAllowed'>
+                                        </div>
+                                    )
+                                }
                             } else {
-                                return (
-                                    <div key={key} tile={key} className='grass-tile notAllowed'>
-                                    </div>
-                                )
+                                if (key < 6 * 2) {
+                                    return (
+                                        <div key={key} tile={key} className='grass-tile allowed' onClick={drop}>
+                                        </div>
+                                    )
+                                } else {
+                                    return (
+                                        <div key={key} tile={key} className='grass-tile notAllowed'>
+                                        </div>
+                                    )
+                                }
                             }
                         } else {
                             if (item.user !== playerId) {
@@ -118,6 +132,11 @@ export function Board({ prep, playerId, figureId }) {
                                         </div>
                                     )
                                 }
+                                return (
+                                    <div key={key} tile={key} className='grass-tile allowed'>
+                                        <Figure tile={key} playerId={item.user} inHand={false} id={item.figure} hide={false} key={'figure' + key} />
+                                    </div>
+                                )
                             }
                         }
                     } else {
@@ -188,7 +207,6 @@ export function Board({ prep, playerId, figureId }) {
                             )
                         }
                     }
-                    return null;
                 })}
             </div>
         </div>

@@ -1,22 +1,46 @@
 //import './board.css';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFigure } from '../../state/board/actions';
 import { selectFigure, backToHand } from '../../state/player/actions';
+import { setPlayer } from '../../state/game/actions';
 import { Board } from './board/Board';
 import { Figure } from './figure/Figure';
+import socket from '../../websocket';
 
-export function Prep({ playerId }) {
-    //const playerId = 0;
+socket.on('action-sent', (data) => {
+    console.log(data.action);
+});
+
+export function Prep() {
     const dispatch = useDispatch();
+    const history = useHistory();
+    const playerId = useSelector(state => state.game.player);
     const tiles = useSelector(state => state.board.tiles);
     const hand = useSelector(state => state.player[playerId].hand);
+    const figures = useSelector(state => state.player[playerId].figures);
     const selected = useSelector(state => state.player[playerId].selected);
-
+    const room = useSelector(state => state.game.room);
+    
+    const player = (playerId) => dispatch(setPlayer(playerId));
     const remove = (tileId) => dispatch(removeFigure(tileId));
     const select = (figureId, playerId) => dispatch(selectFigure(figureId, playerId));
     const toHand = (playerId, tileId, handId, figureId) => dispatch(backToHand(playerId, tileId, handId, figureId));
+
+    if(room == null){
+        history.push('/');
+    }
+
+    socket.on('room-is-full', (data) => {
+        //alert(data.roomId + "\n" + data.player);
+        player((data.player - 1));
+        console.log("player: " + (data.player - 1));
+    });
+
+    window.addEventListener("popstate", () => {
+        //history.go(1);
+    });
 
     function drop(ev) {
         const tile = parseInt(ev.target.attributes.getNamedItem('hand').value); // cél csempe id-je
@@ -72,9 +96,17 @@ export function Prep({ playerId }) {
                         })}
                     </div>
                 </div>
-                <div className="row m-2">
-                    <Link to="/game" className="btn btn-outline-primary" style={startGame() ? { display: "block" } : { display: "none" }}>Játék indítása</Link>
-                </div>
+                <div to="/game" className="row m-2 btn btn-outline-primary" onClick={() => {
+                    socket.emit(
+                        "sync-action",
+                        room,
+                        {
+                            tiles: tiles,
+                            figures: figures,
+                        },
+                        false
+                    );
+                }} style={startGame() ? { display: "block" } : { display: "none" }}>Játék indítása</div>
             </div>
         </>
     )

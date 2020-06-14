@@ -1,10 +1,20 @@
-export const NEXT_PLAYER = 'NEXT_PLAYER';
+export const SET_ROOM = 'SET_ROOM';
 export const SET_OPPONENT = 'SET_OPPONENT';
 export const END_GAME = 'END_GAME';
+export const SET_PLAYER = 'SET_PLAYER';
 
-export const nextPlayer = (playerId) => {
+export const setRoom = (roomId) => {
     return {
-        type: NEXT_PLAYER,
+        type: SET_ROOM,
+        payload: {
+            roomId,
+        },
+    }
+}
+
+export const setPlayer = (playerId) => {
+    return {
+        type: SET_PLAYER,
         payload: {
             playerId,
         },
