@@ -4,14 +4,12 @@ import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFigure } from '../../state/board/actions';
 import { selectFigure, backToHand } from '../../state/player/actions';
-import { setPlayer } from '../../state/game/actions';
+//import { setPlayer, readyPlayer } from '../../state/game/actions';
 import { Board } from './board/Board';
 import { Figure } from './figure/Figure';
 import socket from '../../websocket';
 
-socket.on('action-sent', (data) => {
-    console.log(data.action);
-});
+
 
 export function Prep() {
     const dispatch = useDispatch();
@@ -22,21 +20,14 @@ export function Prep() {
     const figures = useSelector(state => state.player[playerId].figures);
     const selected = useSelector(state => state.player[playerId].selected);
     const room = useSelector(state => state.game.room);
-    
-    const player = (playerId) => dispatch(setPlayer(playerId));
+
     const remove = (tileId) => dispatch(removeFigure(tileId));
     const select = (figureId, playerId) => dispatch(selectFigure(figureId, playerId));
     const toHand = (playerId, tileId, handId, figureId) => dispatch(backToHand(playerId, tileId, handId, figureId));
 
-    if(room == null){
+    if (room == null) {
         history.push('/');
     }
-
-    socket.on('room-is-full', (data) => {
-        //alert(data.roomId + "\n" + data.player);
-        player((data.player - 1));
-        console.log("player: " + (data.player - 1));
-    });
 
     window.addEventListener("popstate", () => {
         //history.go(1);
@@ -76,7 +67,7 @@ export function Prep() {
                 </div>
                 <div className="row">
                     <div className="col col-sm-12 col-md-6 col-lg-6 col-xl-5">
-                        <Board prep={true} playerId={playerId} />
+                        <Board prep={true} />
                     </div>
                     <div className="col col-sm-12 col-md-6 col-lg-6 col-xl-7">
                         {hand.map((item, key) => {
@@ -97,15 +88,18 @@ export function Prep() {
                     </div>
                 </div>
                 <div to="/game" className="row m-2 btn btn-outline-primary" onClick={() => {
+                    console.log(playerId);
                     socket.emit(
                         "sync-action",
                         room,
                         {
+                            player: playerId,
                             tiles: tiles,
                             figures: figures,
                         },
-                        false
+                        true
                     );
+                    history.push('/game');
                 }} style={startGame() ? { display: "block" } : { display: "none" }}>Játék indítása</div>
             </div>
         </>

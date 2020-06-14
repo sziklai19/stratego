@@ -6,11 +6,11 @@ import { Board } from './board/Board';
 import { useSelector/*, useDispatch*/ } from 'react-redux';
 //import { nextPlayer } from '../../state/game/actions';
 
-export function Game({ playerId }) {
+export function Game() {
     //const dispatch = useDispatch();
     //const switchPlayer = (playerId) => dispatch(nextPlayer(playerId));
-    const hand0 = useSelector(state => state.player[0].figures);
-    const hand1 = useSelector(state => state.player[1].figures);
+    const playerId = useSelector(state => state.game.player);
+    const hand = useSelector(state => state.player[playerId === 0 ? 1 : 0].figures);
     const end = useSelector(state => state.game.end);
     const winner = useSelector(state => state.game.winner);
 
@@ -23,25 +23,13 @@ export function Game({ playerId }) {
             </div>
             <div className="row">
                 <div className="col col-5 p-3">
-                    <Board playerId={playerId} />
+                    <Board />
                 </div>
                 <div className="col col-7">
                     <div className="row p-3">
-                        <h5 className="m-0">Kék játékos:</h5>
+                        <h5 className="m-0">Leszedett bábúk:</h5>
                         <ul className="col col-12">
-                            {hand0.map(item => {
-                                if (item != null && item.alive === false) {
-                                    return (<li key={'red'+item.id}>{item.type}</li>);
-                                } else {
-                                    return null;
-                                }
-                            })}
-                        </ul>
-                    </div>
-                    <div className="row p-3">
-                        <h5 className="m-0">Piros játékos:</h5>
-                        <ul className="col col-12">
-                            {hand1.map(item => {
+                            {hand.map(item => {
                                 if (item != null && item.alive === false) {
                                     return (<li key={'red'+item.id}>{item.type}</li>);
                                 } else {

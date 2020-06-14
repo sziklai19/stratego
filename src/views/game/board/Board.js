@@ -121,7 +121,6 @@ export function Board({ prep, figureId }) {
                             if (item.user !== playerId) {
                                 return (
                                     <div key={key} tile={key} className='grass-tile notAllowed'>
-                                        <Figure playerId={item.user} hide={true} />
                                     </div>
                                 )
                             } else {

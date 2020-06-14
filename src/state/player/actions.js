@@ -2,6 +2,7 @@ export const FIGURE_ADDED = 'FIGURE_ADDED';
 export const KILL_FIGURE = 'KILL_FIGURE';
 export const SELECT_FIGURE = 'SELECT_FIGURE';
 export const BACK_TO_HAND = 'BACK_TO_HAND';
+export const SET_FIGURES = 'SET_FIGURES';
 
 export const figureAdded = (figureId, playerId, added) => {
     return {
@@ -10,6 +11,16 @@ export const figureAdded = (figureId, playerId, added) => {
             figureId,
             playerId
         },
+    }
+}
+
+export const setFigures = (playerId, figures) => {
+    return {
+        type: SET_FIGURES,
+        payload: {
+            playerId,
+            figures,
+        }
     }
 }
 
