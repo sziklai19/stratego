@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFigure } from '../../state/board/actions';
 import { selectFigure, backToHand } from '../../state/player/actions';
-//import { setPlayer, readyPlayer } from '../../state/game/actions';
+import { readyPlayer } from '../../state/game/actions';
 import { Board } from './board/Board';
 import { Figure } from './figure/Figure';
 import socket from '../../websocket';
@@ -24,6 +24,7 @@ export function Prep() {
     const remove = (tileId) => dispatch(removeFigure(tileId));
     const select = (figureId, playerId) => dispatch(selectFigure(figureId, playerId));
     const toHand = (playerId, tileId, handId, figureId) => dispatch(backToHand(playerId, tileId, handId, figureId));
+    const ready = (playerId) => dispatch(readyPlayer(playerId));
 
     if (room == null) {
         history.push('/');
@@ -93,12 +94,14 @@ export function Prep() {
                         "sync-action",
                         room,
                         {
+                            prep: true,
                             player: playerId,
                             tiles: tiles,
                             figures: figures,
                         },
                         true
                     );
+                    ready(playerId);
                     history.push('/game');
                 }} style={startGame() ? { display: "block" } : { display: "none" }}>Játék indítása</div>
             </div>

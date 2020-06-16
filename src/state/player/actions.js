@@ -3,6 +3,8 @@ export const KILL_FIGURE = 'KILL_FIGURE';
 export const SELECT_FIGURE = 'SELECT_FIGURE';
 export const BACK_TO_HAND = 'BACK_TO_HAND';
 export const SET_FIGURES = 'SET_FIGURES';
+export const UPDATE_FIGURES = 'UPDATE_FIGURES';
+export const RESET_PLAYER = 'RESET_PLAYER';
 
 export const figureAdded = (figureId, playerId, added) => {
     return {
@@ -24,6 +26,16 @@ export const setFigures = (playerId, figures) => {
     }
 }
 
+export const updateFigures = (room, playerId) => {
+    return {
+        type: UPDATE_FIGURES,
+        payload: {
+            playerId,
+            room,
+        }
+    }
+}
+
 export const selectFigure = (figureId, playerId) => {
     return {
         type: SELECT_FIGURE,
@@ -31,6 +43,15 @@ export const selectFigure = (figureId, playerId) => {
             figureId,
             playerId
         },
+    }
+}
+
+export const resetPlayer = (playerId) => {
+    return {
+        type: RESET_PLAYER,
+        payload: {
+            playerId,
+        }
     }
 }
 

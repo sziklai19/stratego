@@ -1,12 +1,11 @@
 import './board.css';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addFigure, removeFigure } from '../../../state/board/actions';
-import { figureAdded, killFigure } from '../../../state/player/actions';
-import { setOpponent, endGame } from '../../../state/game/actions';
+import { addFigure, removeFigure, updateTiles } from '../../../state/board/actions';
+import { figureAdded, killFigure, updateFigures } from '../../../state/player/actions';
+import { setOpponent, endGame, nextRound } from '../../../state/game/actions';
 import { Figure } from '../figure/Figure';
-
-
+import socket from '../../../websocket';
 
 export function Board({ prep, figureId }) {
     const dispatch = useDispatch();
@@ -15,14 +14,20 @@ export function Board({ prep, figureId }) {
     const added = (figureId, playerId) => dispatch(figureAdded(figureId, playerId));
     const attack = (opponetId) => dispatch(setOpponent(opponetId));
     const kill = (playerId, figureId) => dispatch(killFigure(playerId, figureId))
-    const gameEnd = (end) => dispatch(endGame(end));
+    const gameEnd = (end, playerId) => dispatch(endGame(end, playerId));
+    const syncTiles = (room, playerId) => dispatch(updateTiles(room, playerId))
+    const syncFigures = (room, playerId) => dispatch(updateFigures(room, playerId))
+    const next = () => dispatch(nextRound());
 
     const playerId = useSelector(state => state.game.player);
     const tiles = useSelector(state => state.board.tiles);
     const selected = useSelector(state => state.player[playerId].selected);
     const opponets = useSelector(state => state.player[playerId === 0 ? 1 : 0].figures);
     const figures = useSelector(state => state.player[playerId].figures);
+    const room = useSelector(state => state.game.room);
     const selectedTile = tiles.findIndex(item => item != null && item.user === playerId && item.figure === selected);
+    const round = useSelector(state => state.game.round);
+    const end = useSelector(state => state.game.end);
 
     function drop(ev) {
         if (prep) {
@@ -38,46 +43,62 @@ export function Board({ prep, figureId }) {
                 }
             }
         } else {
-            const tile = parseInt(ev.target.attributes.getNamedItem('tile').value); // cél csempe id-je
-            //if (selected != null) {
-            const start = tiles.findIndex(item => item != null && item.user === playerId && item.figure === selected);
-            const figure = figures[selected];
+            if (round === playerId && !end) {
+                const tile = parseInt(ev.target.attributes.getNamedItem('tile').value); // cél csempe id-je
+                //if (selected != null) {
+                const start = tiles.findIndex(item => item != null && item.user === playerId && item.figure === selected);
+                const figure = figures[selected];
 
-            //console.log('opponent: ' + opponet);
+                //console.log('opponent: ' + opponet);
 
-            if (figure.type !== "bomb" && figure.type !== "flag") {
-                if (tiles[tile] == null) {
-                    place(tile, selected, playerId);
-                    remove(start);
-                    //switchPlayer(playerId);
-                } else {
-                    const opponet = opponets.find(item => item != null && item.id === tiles[tile].figure);
-                    attack(opponet.id);
-                    if (opponet.type === "bomb") {
-                        place(tile, opponet.id, playerId === 0 ? 1 : 0);
-                        kill(playerId, selected);
+                if (figure.type !== "bomb" && figure.type !== "flag") {
+                    if (tiles[tile] == null) {
+                        place(tile, selected, playerId);
                         remove(start);
-                    } else if (opponet.type === "flag") {
-                        gameEnd(true, playerId);
+                        //switchPlayer(playerId);
                     } else {
-                        if (parseInt(opponet.type) > parseInt(figure.type)) {
+                        const opponet = opponets.find(item => item != null && item.id === tiles[tile].figure);
+                        attack(opponet.id);
+                        if (opponet.type === "bomb") {
                             place(tile, opponet.id, playerId === 0 ? 1 : 0);
                             kill(playerId, selected);
                             remove(start);
-                        } else if (parseInt(opponet.type) < parseInt(figure.type)) {
-                            place(tile, selected, playerId);
-                            kill(playerId === 0 ? 1 : 0, opponet.id);
-                            remove(start);
+                        } else if (opponet.type === "flag") {
+                            gameEnd(true, playerId);
+                            console.log('Board.js: ' + playerId);
+                            socket.emit(
+                                "sync-action",
+                                room,
+                                {
+                                    prep: false,
+                                    player: playerId,
+                                    end: true,
+                                },
+                                true
+                            );
                         } else {
-                            kill(playerId === 0 ? 1 : 0, opponet.id);
-                            kill(playerId, selected);
-                            remove(start);
-                            remove(tile);
+                            if (parseInt(opponet.type) > parseInt(figure.type)) {
+                                place(tile, opponet.id, playerId === 0 ? 1 : 0);
+                                kill(playerId, selected);
+                                remove(start);
+                            } else if (parseInt(opponet.type) < parseInt(figure.type)) {
+                                place(tile, selected, playerId);
+                                kill(playerId === 0 ? 1 : 0, opponet.id);
+                                remove(start)
+                            } else {
+                                kill(playerId === 0 ? 1 : 0, opponet.id);
+                                kill(playerId, selected);
+                                remove(start);
+                                remove(tile);
+                            }
                         }
+                        //switchPlayer(playerId);
                     }
-                    //switchPlayer(playerId);
-
                 }
+                next();
+                syncTiles(room, playerId);
+                syncFigures(room, 0);
+                syncFigures(room, 1);
             }
         }
     }

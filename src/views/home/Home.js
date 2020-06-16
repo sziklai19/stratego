@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Desc } from './Desc';
-import { setRoom, setPlayer, readyPlayer } from '../../state/game/actions';
-import { addFigure } from '../../state/board/actions';
+import { setRoom, setPlayer, readyPlayer, nextRound, endGame } from '../../state/game/actions';
+import { addFigure, setTiles } from '../../state/board/actions';
 import { setFigures } from '../../state/player/actions';
 import { useDispatch } from 'react-redux';
 import socket from '../../websocket';
@@ -17,23 +17,34 @@ export function Home() {
     const place = (tileId, figureId, playerId) => dispatch(addFigure(tileId, figureId, playerId));
     const setReady = (playerId) => dispatch(readyPlayer(playerId));
     const figuresSet = (playerId, figures) => dispatch(setFigures(playerId, figures));
+    const syncTiles = (tiles) => dispatch(setTiles(tiles));
+    const next = () => dispatch(nextRound());
+    const gameEnd = (end, playerId) => dispatch(endGame(end, playerId));
 
     socket.on('room-is-full', (data) => {
         //alert(data.roomId + "\n" + data.player);
         player((data.player - 1));
-        console.log("player: " + (data.player - 1));
     });
 
     socket.on('action-sent', (data) => {
-        data.action.tiles.map((item, key) => {
-            if (item != null) {
-                place(key, item.figure, item.user);
-                console.log(item);
+        if (data.action.tiles != null) {
+            if (data.action.prep) {
+                data.action.tiles.map((item, key) => {
+                    if (item != null) {
+                        place(key, item.figure, item.user);
+                    }
+                    return null;
+                });
+            } else {
+                syncTiles(data.action.tiles);
+                next();
             }
-            return null;
-        });
+        }
         if (data.action.figures != null) {
             figuresSet(data.action.player, data.action.figures);
+        }
+        if(data.action.end != null) {
+            gameEnd(true, data.action.player);
         }
         /*console.log(data.action.player)
         data.action.figures.map((item) => {

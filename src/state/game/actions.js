@@ -3,6 +3,7 @@ export const SET_OPPONENT = 'SET_OPPONENT';
 export const END_GAME = 'END_GAME';
 export const SET_PLAYER = 'SET_PLAYER';
 export const READY_PLAYER = 'READY_PLAYER';
+export const NEXT_ROUND = 'NEXT_ROUND'
 
 export const setRoom = (roomId) => {
     return {
@@ -10,6 +11,12 @@ export const setRoom = (roomId) => {
         payload: {
             roomId,
         },
+    }
+}
+
+export const nextRound = () => {
+    return {
+        type: NEXT_ROUND,
     }
 }
 

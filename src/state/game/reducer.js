@@ -1,12 +1,12 @@
-import { SET_ROOM, SET_PLAYER, SET_OPPONENT, END_GAME, READY_PLAYER } from './actions';
+import { SET_ROOM, SET_PLAYER, SET_OPPONENT, END_GAME, READY_PLAYER, NEXT_ROUND } from './actions';
 
 const initialState = {
     player: 0,
     room: null,
     opponent: null,
     end: false,
-    player1: false,
-    player2: false,
+    ready: [false, false],
+    round: 0,
     winner: null
 };
 
@@ -20,8 +20,8 @@ export const gameReducer = (state = initialState, action) => {
                 room: payload.roomId,
                 opponent: state.opponent,
                 end: state.end,
-                player1: state.player1,
-                player2: state.player2,
+                ready: state.ready,
+                round: state.round,
                 winner: state.winner,
             };
         case SET_PLAYER:
@@ -30,38 +30,49 @@ export const gameReducer = (state = initialState, action) => {
                 room: state.room,
                 opponent: state.opponent,
                 end: state.end,
-                player1: state.player1,
-                player2: state.player2,
+                ready: state.ready,
+                round: state.round,
                 winner: state.winner,
             };
         case READY_PLAYER:
-            if(payload.playerId === 0){
-                state.player1 = true;
-                return state;
-            } else {
-                state.player2 = true;
-                return state;
+            return {
+                player: state.player,
+                room: state.room,
+                opponent: state.opponent,
+                end: state.end,
+                ready: payload.playerId === 0 ? [true, state.ready[1]] : [state.ready[0], true],
+                round: state.round,
+                winner: state.winner,
             }
-            
         case SET_OPPONENT:
             return {
                 player: state.player,
                 room: state.room,
                 opponent: payload.opponent,
                 end: state.end,
-                player1: state.player1,
-                player2: state.player2,
+                ready: state.ready,
+                round: state.round,
                 winner: state.winner,
             };
         case END_GAME:
-            return{
+            return {
                 player: state.player,
                 room: state.room,
                 opponent: state.opponent,
                 end: true,
-                player1: state.player1,
-                player2: state.player2,
+                ready: state.ready,
+                round: state.round,
                 winner: payload.playerId
+            }
+        case NEXT_ROUND:
+            return {
+                player: state.player,
+                room: state.room,
+                opponent: state.opponent,
+                end: state.end,
+                ready: state.ready,
+                round: state.round === 0 ? 1 : 0,
+                winner: state.winner,
             }
         default:
             return state;
